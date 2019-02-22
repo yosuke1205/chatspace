@@ -1,6 +1,6 @@
 # DB設計
 
-## userテーブル
+## usersテーブル
 
 |Column|Type|Options|
 |------|----|-------|
@@ -12,11 +12,11 @@
 - has_many :messages
 - has_many :members
 
-## groupテーブル
+## groupsテーブル
 
 |Column|Type|Options|
 |------|----|-------|
-|group_name|string|null: false|
+|name|string|null: false|
 |user_name|string|null: false, foreign_key: true|
 
 ### Association
@@ -28,8 +28,8 @@
 
 |Column|Type|Options|
 |------|----|-------|
-|user_id|integer|null: false, foreign_key: true|
-|group_id|integer|null: false, foreign_key: true|
+|user_id|references|null: false, foreign_key: true|
+|group_id|references|null: false, foreign_key: true|
 
 ### Association
 - belongs_to :group
@@ -37,12 +37,15 @@
 
 
 
-## messageテーブル
+## messagesテーブル
 
 |Column|Type|Options|
 |------|----|-------|
 |body|text|null: false, foreign_key: true|
 |image|string||
+|user_id|references|null: false, foreign_key: true|
+|group_id|references|null: false, foreign_key: true|
+
 
 ### Association
 - belongs_to :group
