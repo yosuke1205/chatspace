@@ -32,8 +32,8 @@ $('#item_form').on('submit', function(e){
       var html = buildSendHTML(message);
       $('.chat-message').append(html)
       $('.chat-message').animate({scrollTop: $('.chat-message')[0].scrollHeight}, 'fast');
-      $('.form__message').val('')
       $('.form__submit').prop('disabled', false);
+      $('.form__message')[0].reset();
       })
     .fail(function(){
       alert('error');
