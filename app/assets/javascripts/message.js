@@ -1,5 +1,6 @@
 $(document).on('turbolinks:load', function(){
   function buildSendHTML(message){
+    var image =(message.image) ? `<img src="${message.image}">` : ``
     var html = `<p class="chat-message__upper-info__talker">
     ${message.name}
     </p>
@@ -8,7 +9,10 @@ $(document).on('turbolinks:load', function(){
     </p>
   <p class="chat-message_a__text">
     ${message.content}
-    </p>`
+    </p>
+  <div class="lower-message__image">
+    ${image}
+  </div>`
    return html;
   }
 
