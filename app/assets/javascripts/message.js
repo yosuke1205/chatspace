@@ -1,10 +1,10 @@
-$(function(){
-  function buildHTML(message).animate({scrolldown: 0}, 500, 'swing');{
+$(document).on('turbolinks:load', function(){
+  function buildSendHTML(message){
     var html = `<p class="chat-message__upper-info__talker">
     ${message.name}
     </p>
   <p class="chat-message__upper-info__date">
-    <%= message.created_at.strftime("%Y/%m/%d %H:%M") %>
+    ${message.created_at}
     </p>
   <p class="chat-message_a__text">
     ${message.content}
@@ -13,23 +13,29 @@ $(function(){
   }
 
 $('#item_form').on('submit', function(e){
+    console.log("発火");
     e.preventDefault();
     var formData = new FormData(this);
-    var href = window.location.href + '/messages'
+    console.log(formData);
+    var url = $(this).attr('action');
     $.ajax({
-      url: href,
+      url: url,
       type: "POST",
       data: formData,
       dataType: 'json',
       processData: false,
       contentType: false
     })
-     .done(function(data){
-      var html = buildHTML(data);
-      $('.messages').append(html)
+  .done(function(message){
+      var html = buildSendHTML(message);
+      $('.chat-message').append(html)
+      $('.chat-message').animate({scrollTop: $('.chat-message')[0].scrollHeight}, 'fast');
       $('.form__message').val('')
-    })
-      .fail(function(){
+      $('.form__submit').prop('disabled', false);
+      })
+    .fail(function(){
       alert('error');
     })
-  });
+  })
+});
+

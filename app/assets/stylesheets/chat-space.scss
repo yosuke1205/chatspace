@@ -103,7 +103,7 @@
 
 .chat-message{
   background-color: #fafafa;
-  height: calc(100vh - 32%);
+  height: calc(100vh - 33%);
   overflow: scroll;
   padding: 46px 40px;
   &__s{
@@ -134,7 +134,7 @@
 .form {
   background-color: #DDDDDD;
   box-sizing: border-box;
-  height: 90px;
+  height: 83px;
   padding: 20px 50px 20px 40px;
   &__message {
     border: none;
