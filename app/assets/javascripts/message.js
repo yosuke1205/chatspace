@@ -13,10 +13,8 @@ $(document).on('turbolinks:load', function(){
   }
 
 $('#item_form').on('submit', function(e){
-    console.log("発火");
     e.preventDefault();
     var formData = new FormData(this);
-    console.log(formData);
     var url = $(this).attr('action');
     $.ajax({
       url: url,
