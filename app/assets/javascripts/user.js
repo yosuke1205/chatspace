@@ -36,28 +36,30 @@ $(document).on("click",'.user-search-remove',function(){
 })
 
 
-  $("#user-search-field").on("keyup", function() {
-    var input = $("#user-search-field").val();
-    $.ajax({
-      type: 'GET',
-      url: '/users',
-      data: { keyword: input },
-      dataType: 'json'
-    })
+$("#user-search-field").on("keyup", function() {
+  var input = $("#user-search-field").val();
+  $.ajax({
+    type: 'GET',
+    url: '/users',
+    data: { keyword: input },
+    dataType: 'json'
+  })
 
-    .done(function(users) {
-      $('#user-search-result').empty();
-      if (users.length !== 0) {
-        users.forEach(function(user){
-          var html = appendName(user);
-       $('#user-search-result').append(html)
+  .done(function(users) {
+    $('#user-search-result').empty();
+    if (users.length !== 0) {
+      users.forEach(function(user){
+        var html = appendName(user);
+    $('#user-search-result').append(html)
         });
       }
-      else {
-        appendErrMsgToHTML("一致するユーザはいません");
-      }
-
-});
-});
-})
+    else {
+      appendErrMsgToHTML("一致するユーザはいません");
+        }
+      })
+  .fail(function() {
+    alert('ユーザー検索に失敗しました');
+      });
+    });
+  })
 })
