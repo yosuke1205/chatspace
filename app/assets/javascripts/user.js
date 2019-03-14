@@ -1,6 +1,6 @@
 $(document).on('turbolinks:load', function(){
   $(function() {
-    function buildDisplayToHTML(user) {
+    function buildMessageHTML(user) {
       var html =
                  `<div class="chat-group-user clearfix">
                   <p class="chat-group-user__name">${ user.name }</p>
@@ -9,7 +9,7 @@ $(document).on('turbolinks:load', function(){
                   return html;
               }
 
-    function removeDisplayToHTML(userName, userId){
+    function removeMessageHTML(userName, userId){
       var html=
               `<div class='chat-group-user clearfix js-chat-member' id='chat-group-user-8'>
                <input name='group[user_ids][]' type='hidden' value='${ userId }'>
@@ -30,7 +30,7 @@ $(document).on('turbolinks:load', function(){
       $(this).parent().remove();
       var userName= $(this).data('userName');
       var userId= $(this).data('userId');
-      removeDisplayToHTML(userName, userId);
+      removeMessageHTML(userName, userId);
   });
 
     $(document).on("click",'.user-search-remove',function(){
@@ -51,7 +51,7 @@ $(document).on('turbolinks:load', function(){
       $('#user-search-result').empty();
       if (users.length !== 0) {
         users.forEach(function(user){
-        var html = buildDisplayToHTML(user);
+        var html = buildMessageHTML(user);
         $('#user-search-result').append(html)
         });
       }
