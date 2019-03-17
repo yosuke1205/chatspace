@@ -1,5 +1,5 @@
 $(document).on('turbolinks:load', function() {
-    function buildSendHTML(message) {
+    function buildSendMessageHTML(message) {
         var image = (message.image) ? `<img src="${message.image}">` : ``
         var html = `
     <div class="chat-message__s">
@@ -34,7 +34,7 @@ $(document).on('turbolinks:load', function() {
                 contentType: false
             })
             .done(function(message) {
-                var html = buildSendHTML(message);
+                var html = buildSendMessageHTML(message);
                 $('.chat-message').append(html)
                 $('.chat-message').animate({ scrollTop: $('.chat-message')[0].scrollHeight }, 'fast');
                 $('.form__message').val('');
@@ -45,13 +45,9 @@ $(document).on('turbolinks:load', function() {
             })
     })
 
-    $(function() {
-        setInterval(update, 5000);
-    });
-
-    function update() {
+    function update(data) {
         if ($('.chat-message')[0]) {
-            var message_id = $('.chat-message:last').data('message.id') || 0;
+            var message_id = $('.chat-message:last').data('message_id') || 0;
         } else {
             var message_id = 0
         }
@@ -64,7 +60,7 @@ $(document).on('turbolinks:load', function() {
             .done(function(data) {
                 var insertHTML = '';
                 data.forEach(function(data) {
-                    insertHTML += buildSendHTML(data);
+                    insertHTML += buildSendMessageHTML(data);
                 })
                 $('.chat-message').append(insertHTML);
                 $('.chat-message').animate({ scrollTop: $('.chat-message')[0].scrollHeight }, 'fast');
@@ -73,5 +69,8 @@ $(document).on('turbolinks:load', function() {
             .fail(function(data) {
                 alert('自動更新に失敗しました');
             })
+            (function() {
+                setInterval(update, 5000);
+            });
     }
 });
