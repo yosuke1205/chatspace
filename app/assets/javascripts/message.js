@@ -1,5 +1,5 @@
 $(document).on('turbolinks:load', function() {
-    function buildSendMessageHTML(message) {
+    function buildSendmessageHTML(message) {
         var image = (message.image) ? `<img src="${message.image}">` : ``
         var html = `
     <div class="chat-message__s">
@@ -34,7 +34,7 @@ $(document).on('turbolinks:load', function() {
                 contentType: false
             })
             .done(function(message) {
-                var html = buildSendMessageHTML(message);
+                var html = buildSendmessageHTML(message);
                 $('.chat-message').append(html)
                 $('.chat-message').animate({ scrollTop: $('.chat-message')[0].scrollHeight }, 'fast');
                 $('.form__message').val('');
@@ -60,7 +60,7 @@ $(document).on('turbolinks:load', function() {
             .done(function(data) {
                 var insertHTML = '';
                 data.forEach(function(data) {
-                    insertHTML += buildSendMessageHTML(data);
+                    insertHTML += buildSendmessageHTML(data);
                 })
                 $('.chat-message').append(insertHTML);
                 $('.chat-message').animate({ scrollTop: $('.chat-message')[0].scrollHeight }, 'fast');
@@ -69,8 +69,8 @@ $(document).on('turbolinks:load', function() {
             .fail(function(data) {
                 alert('自動更新に失敗しました');
             })
-            (function() {
-                setInterval(update, 5000);
-            });
+            $(function() {
+        setInterval(update, 5000);
+});
     }
 });
