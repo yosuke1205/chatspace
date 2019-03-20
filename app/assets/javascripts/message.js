@@ -46,11 +46,12 @@ $(document).on('turbolinks:load', function() {
     })
 
 $(function() {
-    if(window.location.href.match(/\groups\/\d+\/messages/))
+
         setInterval(update, 5000)
 });
     function update(data) {
             var message_id = $('.chat-message__s:last').data('message_id') || 0;
+            if(window.location.href.match(/\/groups\/\d+\/messages/))
         $.ajax({
                 url: location.href,
                 type: 'GET',
