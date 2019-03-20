@@ -83,20 +83,21 @@
   }
   &__leftbox{
   margin-top: 35px;
+    &__member__list{
+      display: flex;
+      font-size: 12px;
+      color: #999999;
+      &__name{
+       list-style: none;
+       margin-left: 0.3rem;
+       }
+    }
     &__group-name{
       font-size: 20px;
       color: #333;
       margin-bottom: 15px;
     }
-    &__member__list{
-      display: flex;
-      font-size: 12px;
-      color: #999999
-  }
-      &_name{
-       list-style: none;
-      }
-    }
+}
 }
 
 

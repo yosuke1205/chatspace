@@ -2,7 +2,7 @@ $(document).on('turbolinks:load', function() {
     function buildSendmessageHTML(message) {
         var image = (message.image) ? `<img src="${message.image}">` : ``
         var html = `
-    <div class="chat-message__s">
+    <div class="chat-message__s" data-message_id="${message.id}">
       <div class="chat-message__upper-info">
       <p class="chat-message__upper-info__talker">
         ${message.name}
@@ -45,12 +45,11 @@ $(document).on('turbolinks:load', function() {
             })
     })
 
+$(function() {
+        setInterval(update, 5000);
+});
     function update(data) {
-        if ($('.chat-message')[0]) {
-            var message_id = $('.chat-message:last').data('message_id') || 0;
-        } else {
-            var message_id = 0
-        }
+            var message_id = $('.chat-message__s:last').data('message_id') || 0;
         $.ajax({
                 url: location.href,
                 type: 'GET',
@@ -62,15 +61,13 @@ $(document).on('turbolinks:load', function() {
                 data.forEach(function(data) {
                     insertHTML += buildSendmessageHTML(data);
                 })
+                if (data.length != 0){
                 $('.chat-message').append(insertHTML);
                 $('.chat-message').animate({ scrollTop: $('.chat-message')[0].scrollHeight }, 'fast');
+            }
             })
-
             .fail(function(data) {
                 alert('自動更新に失敗しました');
             })
-            $(function() {
-        setInterval(update, 5000);
-});
-    }
+  }
 });

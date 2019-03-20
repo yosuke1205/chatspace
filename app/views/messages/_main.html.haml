@@ -7,5 +7,6 @@
       = @group.name
     %ul.main__header__leftbox__member__list
       Member:
-      %li.main__header__leftbox__member__list_name
-        = @group.users.name
+      - @group.users.each do |user|
+        %li.main__header__leftbox__member__list__name
+          = user.name
