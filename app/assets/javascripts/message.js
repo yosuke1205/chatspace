@@ -46,7 +46,8 @@ $(document).on('turbolinks:load', function() {
     })
 
 $(function() {
-        setInterval(update, 5000);
+    if(window.location.href.match(/\groups\/\d+\/messages/))
+        setInterval(update, 5000)
 });
     function update(data) {
             var message_id = $('.chat-message__s:last').data('message_id') || 0;
