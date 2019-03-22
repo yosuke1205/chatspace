@@ -26,11 +26,11 @@ $(document).on('turbolinks:load', function(){
                 </li>`
              }
 
-    $(document).on("click",'.user-search-add', function(){
-      $(this).parent().remove();
-      var userName= $(this).data('userName');
-      var userId= $(this).data('userId');
+    $("#user-search-result").on("click",'.user-search-add', function(){
+      var userName= $(this).data('user-name');
+      var userId= $(this).data('user-id');
       removeMessageHTML(userName, userId);
+      $(this).parent().remove();
   });
 
     $(document).on("click",'.user-search-remove',function(){
