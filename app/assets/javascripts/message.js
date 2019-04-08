@@ -17,13 +17,14 @@ $(document).on('turbolinks:load', function() {
     ${image}
     </div>
     </div>`
-        return html;
+    return html;
     }
 
 
     $('#item_form').on('submit', function(e) {
         e.preventDefault();
         var formData = new FormData(this);
+
         var url = $(this).attr('action');
         $.ajax({
                 url: url,
@@ -35,6 +36,7 @@ $(document).on('turbolinks:load', function() {
             })
             .done(function(message) {
                 var html = buildSendmessageHTML(message);
+                console.log(message)
                 $('.chat-message').append(html)
                 $('.chat-message').animate({ scrollTop: $('.chat-message')[0].scrollHeight }, 'fast');
                 $('.form__message').val('');
@@ -51,6 +53,7 @@ $(function() {
 });
     function update(data) {
             var message_id = $('.chat-message__s:last').data('message_id') || 0;
+             console.log(message_id)
             if(window.location.href.match(/\/groups\/\d+\/messages/))
         $.ajax({
                 url: location.href,
